@@ -9,6 +9,8 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+console.log(123);
+console.log(process);
 console.log(process.env);
 
 const __filename = fileURLToPath(import.meta.url);
