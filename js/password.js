@@ -6,7 +6,7 @@
  */
 function isPasswordProtected() {
     // 只检查普通密码
-    const pwd = window.__ENV__ && window.__ENV__.PASSWORD;
+    const pwd = process.env.PASSWORD;
     
     // 检查普通密码是否有效
     return typeof pwd === 'string' && pwd.length === 64 && !/^0+$/.test(pwd);
@@ -45,7 +45,7 @@ window.isPasswordRequired = isPasswordRequired;
  */
 async function verifyPassword(password) {
     try {
-        const correctHash = window.__ENV__?.PASSWORD;
+        const correctHash = process.env.PASSWORD;
         if (!correctHash) return false;
 
         const inputHash = await sha256(password);
@@ -74,7 +74,7 @@ function isPasswordVerified() {
         if (!stored) return false;
 
         const { timestamp, passwordHash } = JSON.parse(stored);
-        const currentHash = window.__ENV__?.PASSWORD;
+        const currentHash = process.env.PASSWORD;
 
         return timestamp && passwordHash === currentHash &&
             Date.now() - timestamp < PASSWORD_CONFIG.verificationTTL;
