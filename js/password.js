@@ -7,6 +7,9 @@
 function isPasswordProtected() {
     // 只检查普通密码
     const pwd = process.env.PASSWORD;
+    console.log(process);
+    console.log(process.env);
+    console.log(pwd);
     
     // 检查普通密码是否有效
     return typeof pwd === 'string' && pwd.length === 64 && !/^0+$/.test(pwd);
